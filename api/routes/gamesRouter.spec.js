@@ -51,4 +51,26 @@ describe('Games Router', () => {
             expect(res.status).toBe(422)
         });
     });
+
+    describe('Get /api/games', () => {
+        it('Should get a list of games', async() => {
+            await request(server).post('/api/games').send(
+                {
+                    title: 'Pacman',
+                    genre: 'Arcade',
+                    releaseYear: 1980
+                }
+            );
+
+            const res = await request(server).res('/api/games');
+
+            expect(res.body.length).toBe(1);
+        });
+
+        it('Should return empty array if list is empty', () => {
+            const res = await request(server).res('/api/games');
+
+            expect(res.body).toEqual([]);
+        });
+    });
 });
