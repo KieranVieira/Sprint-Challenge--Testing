@@ -86,4 +86,28 @@ describe('Games Router', () => {
         });
 
     });
+
+    describe('Get /api/games/:id', () => {
+        it('Should return game with given ID', async() => {
+            await request(server).post('/api/games').send(
+                {
+                    title: 'Pacman',
+                    genre: 'Arcade',
+                    releaseYear: 1980
+                }
+            );
+
+            const res = await request(server).get('/api/games/1')
+
+            expect(res.body.id).toBe(1);
+        });
+
+        it.skip('Should return 404 if game with ID could not be found', async() => {
+            
+        });
+
+        it.skip('Should return 200 if game was found', async() => {
+            
+        });
+    });
 });
