@@ -108,7 +108,43 @@ describe('Games Router', () => {
             expect(res.status).toBe(404);
         });
 
-        it.skip('Should return 200 if game was found', async() => {
+        it('Should return 200 if game was found', async() => {
+            await request(server).post('/api/games').send(
+                {
+                    title: 'Pacman',
+                    genre: 'Arcade',
+                    releaseYear: 1980
+                }
+            );
+
+            const res = await request(server).get('/api/games/1')
+
+            expect(res.status).toBe(200);
+        });
+    });
+
+    describe('Delete /api/games/:id', () => {
+        it('Should delete game with given id', async() => {
+            const addedGame = await request(server).post('/api/games').send(
+                {
+                    title: 'Pacman',
+                    genre: 'Arcade',
+                    releaseYear: 1980
+                }
+            );
+
+            expect(addedGame.length).toBeTruthy()
+
+            const res = await request(server).delete('/api/games/1')
+
+            expect(res.body.length).toBeFalsy()
+        });
+
+        it.skip('Should return 404 if game could not be found', async() => {
+            
+        });
+        
+        it.skip('Should return 204 if game was deleted', () => {
             
         });
     });
