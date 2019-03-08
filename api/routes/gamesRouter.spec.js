@@ -72,5 +72,18 @@ describe('Games Router', () => {
 
             expect(res.body).toEqual([]);
         });
+
+        it('Should return 200 status', async() => {
+            const res = await request(server).get('/api/games');
+
+            expect(res.status).toBe(200);
+        });
+
+        it('Should return json', async() => {
+            const res = await request(server).get('/api/games');
+
+            expect(res.type).toBe('application/json');
+        });
+
     });
 });
