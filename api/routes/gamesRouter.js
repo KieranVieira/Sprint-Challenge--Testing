@@ -60,6 +60,26 @@ router.get('/:id', (req, res) => {
 
 
 router.delete('/:id', (req, res) => {
-    
+    db('games')
+        .where({ id: req.params.id })
+        .delete()
+        .then(count => {
+            console.log(count)
+            if(count){
+                
+                res.status(204).end();
+            }else{
+                res.status(404).json({
+                    message: "Could not find game with this ID",
+                    error
+                })
+            }
+        })
+        .catch(error => {
+            res.status(500).json({
+                message: "Server could not delete game",
+                error
+            })
+        })
 });
 module.exports = router

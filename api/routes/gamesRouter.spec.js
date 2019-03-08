@@ -125,7 +125,7 @@ describe('Games Router', () => {
 
     describe('Delete /api/games/:id', () => {
         it('Should delete game with given id', async() => {
-            const addedGame = await request(server).post('/api/games').send(
+            await request(server).post('/api/games').send(
                 {
                     title: 'Pacman',
                     genre: 'Arcade',
@@ -133,19 +133,15 @@ describe('Games Router', () => {
                 }
             );
 
-            expect(addedGame.length).toBeTruthy()
-
             const res = await request(server).delete('/api/games/1')
 
-            expect(res.body.length).toBeFalsy()
+            expect(res.status).toBe(204)
         });
 
-        it.skip('Should return 404 if game could not be found', async() => {
-            
-        });
-        
-        it.skip('Should return 204 if game was deleted', () => {
-            
+        it('Should return 404 if game could not be found', async() => {
+            const res = await request(server).delete('/api/games/234')
+
+            expect(res.status).toBe(404)
         });
     });
 });
