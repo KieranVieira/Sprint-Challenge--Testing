@@ -29,7 +29,7 @@ describe('Games Router', () => {
                 }
             );
 
-            expect(res.status).toBe(200);
+            expect(res.status).toBe(201);
         });
 
         it('Should return json', async() => {
@@ -62,13 +62,13 @@ describe('Games Router', () => {
                 }
             );
 
-            const res = await request(server).res('/api/games');
+            const res = await request(server).get('/api/games');
 
             expect(res.body.length).toBe(1);
         });
 
-        it('Should return empty array if list is empty', () => {
-            const res = await request(server).res('/api/games');
+        it('Should return empty array if list is empty', async() => {
+            const res = await request(server).get('/api/games');
 
             expect(res.body).toEqual([]);
         });

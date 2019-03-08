@@ -8,7 +8,7 @@ router.post('/', (req, res) => {
         db('games')
             .insert(req.body)
             .then(id => {
-                res.status(200).json(id)
+                res.status(201).json(id)
             })
             .catch(error => {
                 res.status(422).json({
@@ -25,7 +25,10 @@ router.post('/', (req, res) => {
 });
 
 router.get('/', (req, res) => {
-    
+    db('games')
+        .then(games => {
+            res.status(200).json(games)
+        })
 });
 
 module.exports = router
