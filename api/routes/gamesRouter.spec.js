@@ -20,6 +20,18 @@ describe('Games Router', () => {
             expect(res.body).toEqual([1]);
         });
 
+        it('Should return 200 code for added game', async() => {
+            const res = await request(server).post('/api/games').send(
+                {
+                    title: 'Pacman',
+                    genre: 'Arcade',
+                    releaseYear: 1980
+                }
+            );
+
+            expect(res.status).toBe(200);
+        });
+
         it('Should return json', async() => {
             const res = await request(server).post('/api/games').send(
                 {
@@ -36,7 +48,7 @@ describe('Games Router', () => {
                 title: 'Pacman'
             });
 
-            expect(res.status).toBe(400)
+            expect(res.status).toBe(422)
         });
     });
 });
