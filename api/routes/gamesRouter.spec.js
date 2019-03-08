@@ -8,12 +8,12 @@ describe('Games Router', () => {
         return db('games').truncate()
     })
     describe('Post /api/games', () => {
-        it('Should return id 1 for added game', () => {
-            const res = request(server).post('/api/games').send(
+        it('Should return id 1 for added game', async() => {
+            const res = await request(server).post('/api/games').send(
                 {
-                    title: 'Pacman', // required
-                    genre: 'Arcade', // required
-                    releaseYear: 1980 // not required
+                    title: 'Pacman',
+                    genre: 'Arcade',
+                    releaseYear: 1980
                 }
             );
 
