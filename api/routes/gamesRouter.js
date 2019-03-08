@@ -10,6 +10,10 @@ router.post('/', (req, res) => {
             res.status(200).json(id)
         })
         .catch(error => {
+            res.status(400).json({
+                message: "Bad request, please provide required fields",
+                error
+            })
         })
 });
 
