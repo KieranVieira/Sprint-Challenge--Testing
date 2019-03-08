@@ -29,6 +29,21 @@ router.get('/', (req, res) => {
         .then(games => {
             res.status(200).json(games)
         })
+        .catch(error => {
+            res.status(500).json({
+                message: "Server could not get games",
+                error
+            })
+        })
+});
+
+router.get('/:id', (req, res) => {
+    db('games')
+        .where({ id: req.params.id })
+        .first()
+        .then(game => {
+            res.status(200).json(game)
+        })
 });
 
 module.exports = router
