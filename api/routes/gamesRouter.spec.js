@@ -102,8 +102,8 @@ describe('Games Router', () => {
             expect(res.body.id).toBe(1);
         });
 
-        it.skip('Should return 404 if game with ID could not be found', async() => {
-            const res = await request(server).get('/api/games/1');
+        it('Should return 404 if game with ID could not be found', async() => {
+            const res = await request(server).get('/api/games/11234');
 
             expect(res.status).toBe(404);
         });

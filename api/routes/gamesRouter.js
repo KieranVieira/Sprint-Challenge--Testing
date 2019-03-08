@@ -42,7 +42,19 @@ router.get('/:id', (req, res) => {
         .where({ id: req.params.id })
         .first()
         .then(game => {
-            res.status(200).json(game)
+            if(game){
+                res.status(200).json(game)
+            }else{
+                res.status(404).json({
+                    message:"Could not find game with this id"
+                })
+            }
+        })
+        .catch(error => {
+            res.status(500).json({
+                message: "Server could not get game",
+                error
+            })
         })
 });
 
