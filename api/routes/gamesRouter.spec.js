@@ -5,7 +5,7 @@ const db = require('../../database/dbConfig.js');
 
 describe('Games Router', () => {
     afterEach(() => {
-        return db('games').truncate()
+        return db('games').truncate();
     })
     describe('Post /api/games', () => {
         it('Should return id 1 for added game', async() => {
@@ -19,6 +19,7 @@ describe('Games Router', () => {
 
             expect(res.body).toEqual([1]);
         });
+
         it('Should return json', async() => {
             const res = await request(server).post('/api/games').send(
                 {
@@ -30,8 +31,12 @@ describe('Games Router', () => {
 
             expect(res.type).toBe('application/json');
         });
-        it.skip('Should return 400 if required field not provided', () => {
-            
+        it('Should return 400 if required field not provided', async() => {
+            const res = await request(server).post('/api/games').send({
+                title: 'Pacman'
+            });
+
+            expect(res.status).toBe(400)
         });
     });
 });
