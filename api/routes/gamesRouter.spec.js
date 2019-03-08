@@ -17,10 +17,18 @@ describe('Games Router', () => {
                 }
             );
 
-            expect(res.body).toEqual([1])
+            expect(res.body).toEqual([1]);
         });
-        it.skip('Should return json', () => {
-            
+        it('Should return json', async() => {
+            const res = await request(server).post('/api/games').send(
+                {
+                    title: 'Pacman',
+                    genre: 'Arcade',
+                    releaseYear: 1980
+                }
+            );
+
+            expect(res.type).toBe('application/json');
         });
         it.skip('Should return 400 if required field not provided', () => {
             
